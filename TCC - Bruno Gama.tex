@@ -51,7 +51,7 @@
 \autor{BRUNO QUEIROZ GAMA}
 \local{Salvador}
 \data{Março, 2014}
-\orientador{Prof. MSc. Marco Antonio dos Reis}  
+\orientador{Prof. Me. Marco Antonio Reis}  
 %\coorientador{Adeílson Fábio Correia}
 \instituicao{Faculdade de Tecnologia SENAI CIMATEC}
 \tipotrabalho{Trabalho de Conclusão de Curso}
@@ -296,6 +296,8 @@ Abstract's text.
 
 \begin{siglas}
 
+  \item [BIR] Brazilian Institute of Robotics
+  
   \item [CLP] Controlador Lógico Programável
   
   \item [FT] Função de Transferência
@@ -306,17 +308,27 @@ Abstract's text.
   
   \item [m] Metro
   
+  \item [Kp] Ganho proporcional do controlador PID
+  
+  \item [Ki] Ganho integral do controlador PID
+  
+  \item [Kd] Ganho derivativo do controlador PID
+  
   \item [MA] Malha Aberta
   
   \item [MF] Malha Fechada
   
   \item [N] Newton
   
+  \item [Pd] Pólo desejado
+  
   \item [PID] Proporcional Integral Derivativo
   
-  item [rad] Radiano
+  \item [rad] Radiano
   
   \item [ROS] Robot Operating System
+  
+  \item [ts] Tempo de acomodação
   
   \item [s] Segundo
   
@@ -363,29 +375,25 @@ Atualmente as empresas tem encarado o desafio de modernizar e inovar em suas est
 
 Em frente ao dever de realizar o crescimento sustentável da sociedade, a automação e a robótica realizou o desenvolvimento e aumentou a eficiência dos processos industriais, no entanto, o mercado passou a exigir maior diversificação e menor tempo de desenvolvimento dos produtos, tornando a exigir maiores evoluções da automação e robótica \cite{rosario}.
 
-Diante dessas necessidades de diversificação exigida pelo mercado mundial, algumas empresas e centros de pesquisa encontram-se com a aspiração de desenvolver novos produtos com nível de inovação e diversificação não encontrado no mercado. Este é caso do atual do SENAI - CIMATEC, que em seu laboratório de microeletrônica desenvolve um robô inovador para inspeção em linhas de transmissão de energia elétrica com alta tensão.
+Diante dessas necessidades de diversificação exigida pelo mercado mundial, algumas empresas e centros de pesquisa encontram-se com a aspiração de desenvolver novos produtos com nível de inovação e diversificação não encontrado no mercado. Este é caso do atual do SENAI - CIMATEC, que em seu Instituto Brasileiro de Robótica desenvolve um robô inovador para inspeção em linhas de transmissão de energia elétrica com alta tensão.
 
 Além da utilização do robô em um campo de atuação a qual exige alta repetitividade e precisão, este produto proporcionará a segurança, visto que o profissional que realiza a inspeção das linhas de transmissão com alta tensão está exposto a um alto grau de periculosidade.
 
-%Visando confeccionar este protótipo, insere-se este trabalho de conclusão de curso. Uma vez que o robô apresenta as unidades de apoio, tração e manipulação, enxerga-se a necessidade de projetar um sistema de controle de posição para a unidade de manipulação do robô, pois esta necessita de alta precisão em seus movimentos dado que a intercorrência de uma falha poderia causar um acidente.
-
-Visando confeccionar este protótipo, insere-se este trabalho de conclusão de curso. Uma vez que o robô apresenta as unidades de apoio, tração e busca, enxerga-se a necessidade de projetar um sistema de controle de posição para as unidades do robô, pois este necessita de alta precisão em seus movimentos dado que a intercorrência de uma falha poderia causar um acidente. Desta forma, denominou-se de sistema de manipulação a parte que contem os servomotores, engrenagens e sensores que interliga as unidades de apoio e tração.
-
-\todo{Falta terminar}
+Visando confeccionar este protótipo, insere-se este trabalho de conclusão de curso. Uma vez que o robô apresenta as unidades de apoio, tração e busca, enxerga-se a necessidade de projetar um sistema de controle de posição para os movimentos do robô, pois este necessita de alta precisão em seus movimentos dado que a intercorrência de uma falha poderia causar um acidente. Desta forma, denominou-se de sistema de manipulação a parte que contem os servomotores, engrenagens e sensores que interliga as unidades de apoio e tração.
 
 \section{OBJETIVOS} %FEITO
 
-Este trabalho tem como objetivo principal realizar o controle de posição de três juntas presentes no sistema de manipulação de um robô atualmente desenvolvido pela equipe de microeletrônica do SENAI - CIMATEC. Este robô deverá realizar a inspeção de linhas de transmissão de energia elétrica em alta tensão, logo o controlador deve garantir uma precisão de posicionamento mínima para realização da atividade.
+Este trabalho tem como objetivo principal realizar a modelagem e o controle de posição do sistema de manipulação de um robô atualmente desenvolvido pela equipe de microeletrônica e pelo BIR no SENAI - CIMATEC. Este robô deverá realizar a inspeção de linhas de transmissão de energia elétrica em alta tensão, logo o controlador deve garantir a precisão de posicionamento mínima para realização da atividade.
 
-Como produto final deste trabalho de conclusão de curso, espera-se obter a equação do modelo mecânico dos motores e do robô e os ganhos \textit{(proporcinal, integral e derivativo)} dos controladores usados no sistema de manipulação do robô. Estes controladores deverão ser robustos o suficiente para que os servomotores dessa unidade siga as posições e velocidades de referência configuradas previamente.
+Como produto final deste trabalho de conclusão de curso, espera-se obter a equação do modelo mecânico dos motores e do robô e os ganhos dos controladores usados no sistema de manipulação do robô. Estes controladores deverão ser robustos o suficiente para que os servomotores dessa unidade siga as posições e velocidades de referência configuradas previamente.
 
 \section{JUSTIFICATIVA} %FEITO
 
-Sabe-se que é extremamente importante o controle de posição e velocidade de unidades que realizam o movimento de robôs, visto que a depender da aplicação desejada, estes não podem estar sujeito a uma alta possibilidade de falhas. Sob esta análise, um sistema de controle que atenda a todas as especificações de desempenho para o movimento do sistema de manipulação do robô é imprescindível para o andamento do projeto.
+Sabe-se que é extremamente importante o controle de posição e velocidade de unidades que realizam o movimento de robôs, visto que a depender da aplicação desejada, estes não podem estar sujeito a falhas. Sob esta análise, um sistema de controle que atenda a todas as especificações de desempenho para o movimento do sistema de manipulação do robô é imprescindível para o andamento do projeto.
 
 Entre outros motivos que comprovam a necessidade de um sistema de controle, podem ser acentuados a indispensabilidade de projetar um sistema em malha fechada que siga uma referência configurada pelo controlador com precisão, reduzindo a sensibilidade à variações de parâmetros, permitindo garantir a estabilidade e atenuando o feito de pertubações.
 
-A realização deste trabalho sustenta-se pela necessidade presente de um sistema de controle de posição para o sistema de manipulação do robô desenvolvido pela equipe de microeletrônica do SENAI - CIMATEC. Este trabalho visa projetar um sistema de controle que atenda as especificações de movimento do robô para realização da inspeção com segurança e precisão em suas ações.
+A realização deste trabalho sustenta-se pela necessidade presente de um sistema de controle de posição para o sistema de manipulação do robô desenvolvido pela equipe de microeletrônica e pelo BIR do SENAI - CIMATEC. Este trabalho visa projetar um sistema de controle que atenda as especificações de movimento do robô para realização da inspeção com segurança e precisão em suas ações.
 
 \section{METODOLOGIA} %FEITO
 
@@ -401,7 +409,7 @@ A metodologia aplicada para realização deste trabalho de conclusão de curso p
 
 \item Projeto do controlador interno ao MX-106R a partir do modelo levantado anteriormente.
 
-\item Modelagem via SolidWorks do sistema de manipulação do robô.
+\item Ensaio experimental das juntas robóticas.
 
 \item Projeto dos controladores externos ao servomotor Dynamixel MX-106R.
 
@@ -411,7 +419,7 @@ A metodologia aplicada para realização deste trabalho de conclusão de curso p
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-\chapter{ROBÓTICA}
+\chapter{ROBÓTICA} %FEITO
 
 A palavra "robô"\ foi usada pela primeira vez pelo dramaturgo Karel Capek em 1921. Nessa época a palavra representava a realização do trabalho manual para seres humanos de forma perfeita e incansável. Posteriormente, na Europa, robótica foi definida como "os meios através dos quais robôs são colocados juntos e efetuando trabalho" \cite{fuller}.
 
@@ -435,15 +443,15 @@ Normalmente os robôs apresentam 3 tipos de componentes: partes físicas, instru
 
 Todo as ações do robô devem ser direcionados pela unidade de controle, de forma que seus movimentos sejam realizados da maneira e no tempo correto. Para dispor de segurança em todas essas ações, os sistemas devem funcionar em malha fechada \textit{(feedback de informação durante a realização da ação desejada)}.
 
-Projetar um sistema de controle eficiente para atuar no movimento do sistema de manipulação requer uma análise precisa das características da estrutura mecânica, dos atuadores e dos sensores. Logo, realizar a modelagem das unidades que serão controladas é extremamente necessário para encontrar a melhor estratégia de controle do robô, uma vez que o sistema de manipulação é um conjunto de articulações a qual o movimento de uma junta influencia na posição de outra. Além disso, o modelo matemático do robô pode variar a depender os componentes utilizados \cite{sciavicco}.
+Projetar um sistema de controle eficiente para atuar no movimento do sistema de manipulação requer uma análise precisa das características da estrutura mecânica, dos atuadores e dos sensores. Logo, realizar a modelagem das unidades que serão controladas é extremamente necessário para encontrar a melhor estratégia de controle do robô, pois o sistema de manipulação é um conjunto de articulações a qual o movimento de uma junta influencia na posição de outra. Além disso, o modelo matemático do robô pode variar a depender os componentes utilizados \cite{sciavicco}.
 
 %Os sensores são os elementos sensíveis aos fenômenos físicos como a pressão ou a temperatura de um fluido, enquanto que os atuadores são os mecanismos capazes de interagir no processo, alterando o valor das variáveis manipuláveis. Os controladores, por sua vez, são os dispositivos que, através do processamento dos dados obtidos pelos sensores e em função da programação pré-estabelecida, geram comandos para os atuadores.
 %\cite{silveira}
 
-\section{INSPEÇÃO EM LINHAS DE TRANSMISSÃO DE ENERGIA ELÉTRICA DE ALTA TENSÃO}
+\section{INSPEÇÃO EM LINHAS DE TRANSMISSÃO DE ENERGIA ELÉTRICA DE ALTA TENSÃO} %FEITO
 
 %BEN2013
-No Brasil, segundo o Balanço Energético Nacional 2013, 16,9\% do consumo final de energia é proveniente da Eletricidade. Este valor considerável mostra a importância dessa energia para o funcionamento da industria, dos grandes centros urbanos e da população em geral. Logo, este teriam muitos problemas caso a transmissão dessa energia for interrompida, causando desconforto, prejuízo e outras adversidades.
+No Brasil, segundo o Balanço Energético Nacional 2013, 16,9\% do consumo final de energia é proveniente da Eletricidade. Este valor considerável mostra a importância dessa energia para o funcionamento da industria, dos grandes centros urbanos e da população em geral. Logo, este teriam muitos problemas caso a transmissão dessa energia fosse interrompida, causando desconforto, prejuízo e outras adversidades.
 
 %Eletrobras
 Para transmitir a energia elétrica das usinas até os grandes centros consumidores, a energia percorre longas distâncias através das redes de transmissão. As redes de transmissão são compostas por cabos, torres e isoladores e, devido a sua importância, precisam receber manutenção frequentemente.
@@ -461,7 +469,7 @@ Desde 1998, Hidro Québec research institute (\cite{transmission}) tem intensifi
 
 %Existe outras informações no capítulo 8 (Finalidade do Processo) sobre a inspeção necessária
 
-\section{ROBÔ IRoS - INSPECTION ROBOT SYSTEM (CEMIG)}
+\section{ROBÔ IRoS - INSPECTION ROBOT SYSTEM (CEMIG)} %FEITO
 
 %Além da utilização do robô em um campo de atuação a qual exige alta repetitividade e precisão, este produto proporcionará a segurança, visto que o profissional que realiza a inspeção das linhas de transmissão com alta tensão está exposto a um alto grau de periculosidade.
 
@@ -469,7 +477,7 @@ Desde 1998, Hidro Québec research institute (\cite{transmission}) tem intensifi
 
 %Falar que tem algumas semelhanças com o robô "artigo - Transmission Line Maintenance...2.2.1 pg.4"
 
-Atualmente encontra-se em desenvolvimento no laboratório de microeletrônica do SENAI - CIMATEC um robô para inspeção em linhas de transmissão de energia elétrica com alta tensão. O desenvolvimento deste robô busca realizar inovações em relação aos modelos atualmente encontrados no mercado.
+Atualmente encontra-se em desenvolvimento no laboratório de microeletrônica e no BIR do SENAI - CIMATEC um robô para inspeção em linhas de transmissão de energia elétrica com alta tensão. O desenvolvimento deste robô busca realizar inovações em relação aos modelos atualmente encontrados no mercado.
 
 Nomeado de robô IRoS, este foi idealizado em uma parceria de desenvolvimento entre o SENAI-CIMATEC e a CEMIG \textit{(Companhia Energética de Minas Gerais)}. Buscando sempre o caráter inovador neste desenvolvimento, o IRoS busca superar seus concorrente no mercado internacional em termos de autonomia, atividades de inspeção e peso.
 
@@ -524,7 +532,7 @@ Na figura \ref{fig:diagrama} pode ser visualizado o Diagrama da Arquitetura Gera
 \label{fig:diagrama}
 \end{figure}
 
-\subsection{SISTEMA DE CONTROLE DO ROBÔ IRoS}
+\subsection{SISTEMA DE CONTROLE DO ROBÔ IRoS} %FEITO
 
 O sistema de controle deve ser implementado a partir de algoritmos que elaborem estratégias de controle para que o robô se desloque na linha, ultrapasse obstáculos e realize as inspeções autonomamente a partir dos dados do Sistema de Sensores \cite{cemig}.
 
@@ -549,7 +557,7 @@ Sendo que R(s) representa a posição de referência, C(s) é a função de tran
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
 
-\chapter{MODELAGEM DE SISTEMAS DINÂMICOS}
+\chapter{MODELAGEM DE SISTEMAS DINÂMICOS} %FEITO
 
 Em função da necessidade de realizar o projeto do controlador do sistema de manipulação do robô IRoS, uma atividade preliminar muito importante é a modelagem matemática da dinâmica do sistema.
 
@@ -561,13 +569,13 @@ Em função da necessidade de realizar o projeto do controlador do sistema de ma
 
 O objetivo de encontrar o modelo dos sistemas dinâmicos é escolher os melhores parâmetros do controlador, de forma que a malha de controle execute bem o controle da variável do processo. A escolha dos melhores parâmetros do controlador podem ser escolhidos de duas formas diferentes. O primeiro método seria escolhendo alguns parâmetros, observando o comportamento do sistema e posteriormente ajustando-se os parâmetros até que o sistema apresente o comportamento desejado. O segundo método seria o desenvolvimento do modelo matemático que descreve o comportamento do sistema, e posteriormente, utilizar-se-ia técnicas de controle para escolher os parâmetros do controlador \cite{astrom}.
 
-Por se tratar de um sistema eletro-mecânico, o robô IRoS necessita de modelagens matemáticas que identifique seus sistemas mecânicos e eletrônicos. Utiliza-se então a segunda lei de Newton \textit{(identificação mecânica)} e as leis das correntes e das tensões de Kirchhoff \textit{(identificação eletrônica)}.
+Por se tratar de um sistema eletro-mecânico, o robô IRoS necessita de modelagens matemáticas que identifique seus sistemas mecânicos e eletrônicos. Utiliza-se então a segunda lei de Newton \textit{(identificação mecânica)} e as leis das correntes e das tensões de Kirchhoff \textit{(identificação eletrônica)} para modelar o sistema.
 
 O modelo dinâmico dos processos elétricos e mecânicos presentes no robô fornecerá a relação entre as entradas e saídas do sistema durante o regime transitório, período o qual é muito mais difícil extrair o comportamento do sistema. No entanto uma série de modelos podem ser aplicados para sistema lineares invariantes no tempo ou sistemas linearizados em um ponto de equilíbrio \cite{astrom}.
 
 Segundo \citeonline{astrom}: "Em controle de processos, o degrau  é a resposta transiente mais usada para identificação de processos". Isto ocorre pois o degrau é o tipo de distúrbio mais fácil de ser gerado manualmente.
 
-\section{MODELAGEM POR RESPOSTA AO DEGRAU} \label{sec:mod_degrau}
+\section{MODELAGEM POR RESPOSTA AO DEGRAU} \label{sec:mod_degrau} %FEITO
 
 Segundo \citeonline{enso}, são recomendadas as seguintes etapas para realizar a identificação e modelagem de um sistema:
 
@@ -616,7 +624,7 @@ Muitos métodos de sintonia e projeto de sistemas de controle são baseado na cu
 Muitos métodos de obtenção do modelo dinâmico de sistemas tem sido apresentado na literatura durante anos. Entre eles estão: modelo com dois, três e quatro parâmetros. Esses parâmetros podem ser extraídos a partir da resposta do sistema em malha aberta. Para sistemas lineares estes parâmetros serão constantes, porém para processos não-lineares, os parâmetros dependem das condições de operação \cite{astrom}.
 
 
-\subsection{MODELO A DOIS PARÂMETROS} \label{sec:mod_2_param}
+\subsection{MODELO A DOIS PARÂMETROS} \label{sec:mod_2_param} %FEITO
 
 O modelo a dois parâmetros é a mais simples representação de um sistema. Sendo que o primeiro parâmetro é o ganho \textit{(K)} e o outro é a constante de tempo do sistema \textit{($\tau$)}. A depender da complexidade, este modelo pode representar de forma satisfatória o processo. O modelo a dois parâmetros pode ser representado pela equação \cite{astrom}:
 
@@ -693,7 +701,7 @@ s(t) = K(1- (1 + \frac{t-L}{\tau})e^{-(t-L)/\tau}) \label{eq:g_de_t_3param_2}
 
 Nesta formato, o parâmetro $\tau$ pode ser obtido a partir de soluções numéricas.
 
-\subsection{MODELO A QUATRO PARÂMETROS}
+\subsection{MODELO A QUATRO PARÂMETROS} %FEITO
 
 De acordo com \citeonline{astrom}, uma aproximação ainda melhor de um processo real pode ser obtido pela seguinte função de transferência:
 
@@ -732,7 +740,7 @@ Os controladores em malha fechada comparam o valor real da saída da planta com 
 \end{figure}
 
 
-\section{AÇÕES DE CONTROLE}
+\section{AÇÕES DE CONTROLE} %FEITO
 
 Conforme \citeonline{ogata}, os controladores industriais podem ser classificados de acordo com suas ações de controle da seguinte forma:
 
@@ -752,7 +760,7 @@ Conforme \citeonline{ogata}, os controladores industriais podem ser classificado
 
 \end{enumerate}
 
-\subsection{AÇÃO DE CONTROLE ON-OFF}
+\subsection{AÇÃO DE CONTROLE ON-OFF} %FEITO
 
 O controlador on-off é uma estrutura funcional simples, a qual não tem parâmetro a ser configurado e tem apenas duas posições fixas. Esta estratégia busca manter o valor da variável do processo  próximo ao valor de \textit{setpoint}, no entanto, o sistema normalmente apresenta oscilações em relação ao valor de referência \cite{astrom}.
 
@@ -765,7 +773,7 @@ U_{2} & \textrm{para $e(t)<0$}
 \end{array} \right.
 \end{displaymath}
 
-\subsection{AÇÃO DE CONTROLE PROPORCIONAL}
+\subsection{AÇÃO DE CONTROLE PROPORCIONAL} %FEITO
 
 O controlador de ação proporcional tem a seguinte relação entre a sua saída u(t) e sua entrada \textit{(sinal de erro atuante)} e(t) \cite{ogata}:
 
@@ -779,7 +787,7 @@ Aplicando a transformada de Laplace na equação anterior, temos:
 
 Esta ação de controle pode evitar os problemas de variação do valor da variável do processo, visto que pequenos sinais de controle são gerados para pequenos sinais de erro. No entanto, normalmente pode haver um erro em estado permanente.
 
-\subsection{AÇÃO DE CONTROLE INTEGRAL}
+\subsection{AÇÃO DE CONTROLE INTEGRAL} %FEITO
 
 O controlador de ação integral tem a seguinte relação entre a sua saída u(t) e sua entrada \textit{(sinal de erro atuante)} e(t) \cite{ogata}:
 
@@ -793,7 +801,7 @@ Aplicando a transformada de Laplace na equação anterior e considerando as cond
 
 A função principal da ação de controle integral é assegurar que a saída do processo esteja no valor informado pelo setpoint durante o regime permanente. Com a ação de controle integral, um pequeno erro positivo deixará o sinal de controle cada vez maior, e um erro negativo diminuirá o sinal de controle, não importa o quão pequeno é o erro \cite{astrom}.
 
-\subsection{AÇÃO DE CONTROLE PROPORCIONAL-INTEGRAL}
+\subsection{AÇÃO DE CONTROLE PROPORCIONAL-INTEGRAL} %FEITO
 
 O controlador de ação proporcional-integral tem a seguinte relação entre a sua saída u(t) e sua entrada \textit{(sinal de erro atuante)} e(t) \cite{ogata}:
 
@@ -805,7 +813,7 @@ Aplicando a transformada de Laplace na equação anterior e considerando as cond
 \frac{U(s)}{E(s)} = K_{p} + \frac{K_{i}}{s} \label{eq:g_s_cont_prop_integ}
 \end{equation}
 
-\subsection{AÇÃO DE CONTROLE PROPORCIONAL-DERIVATIVO}
+\subsection{AÇÃO DE CONTROLE PROPORCIONAL-DERIVATIVO} %FEITO
 
 O controlador de ação proporcional-derivativo tem a seguinte relação entre a sua saída u(t) e sua entrada \textit{(sinal de erro atuante)} e(t) \cite{ogata}:
 
@@ -817,7 +825,7 @@ Aplicando a transformada de Laplace na equação anterior e considerando as cond
 \frac{U(s)}{E(s)} = K_{p} + K_{d}s \label{eq:g_s_cont_prop_deriv}
 \end{equation}
 
-\subsection{AÇÃO DE CONTROLE PROPORCIONAL-INTEGRAL-DERIVATIVO}
+\subsection{AÇÃO DE CONTROLE PROPORCIONAL-INTEGRAL-DERIVATIVO} %FEITO
 
 O controlador de ação proporcional-integral-derivativo tem a seguinte relação entre a sua saída u(t) e sua entrada \textit{(sinal de erro atuante)} e(t) \cite{ogata}:
 
@@ -844,10 +852,9 @@ Um exemplo de controle em cascata pode ser visto na figura \ref{fig:cont_cascata
 
 Quando o controladores em cascata são usados, a malha de controle interno detecta distúrbios muito mais rápido que a malha de controle externa. Dessa forma, grande parte das pertubações são eliminadas pelo controlador secundário \cite{astrom}.
 
-%Confirma essa parte do texto com TITO
 De acordo com \citeonline{astrom}, para realizar o controle de servomotores pode-se usar controladores em cascata. Sendo que a malha interna ou secundária controlaria a velocidade do servomotor, enquanto a malha externa seria responsável pelo controle de posição. Uma vez que a relação entre posição e velocidade é a integral no tempo, não existe razão para introduzir a ação integral no controle de velocidade nem a ação derivada no controle de posição.
 
-\section{ANÁLISE DO LUGAR DAS RAÍZES}
+\section{ANÁLISE DO LUGAR DAS RAÍZES} %FEITO
 
 Sabendo que a resposta transitória do sistema varia de acordo com a localização dos pólos de malha fechada e que pode mudar a depender do parâmetros configurados no controlador, é importante que o projetista saiba como como os pólos da FTMF se movem no plano \textit{s} \cite{ogata}.
 
@@ -893,13 +900,13 @@ A partir da equação \ref{eq:caract} pode-se obter as seguintes condições de 
 
 \end{itemize}
 
-Segundo \citeonline{ogata}, o lugar das raízes é o método para localizar a posição das raízes da equação característica do sistema de malha fechada quando um parâmetro específico (normalmente o ganho \textit{K}) varia. Esse gráfico mostra as contribuições de cada pólo ou zero de malha aberta nas localizações dos pólos de malha fechada.
+Segundo \citeonline{ogata}, o lugar das raízes é o método para localizar a posição das raízes da equação característica do sistema de malha fechada quando um parâmetro específico (normalmente o ganho \textit{K}) varia. O gráfico do lugar das raízes mostra as contribuições de cada pólo ou zero de malha aberta nas localizações dos pólos de malha fechada.
 
-\chapter{SIMULAÇÕES E RESULTADOS EXPERIMENTAIS}
+\chapter{SIMULAÇÕES E RESULTADOS EXPERIMENTAIS} % FEITO
 
 A fim de projetar o sistema de controle de posição do robô, realizou-se a modelagem e o controle de velocidade do servomotor Dynamixel MX-106R em cascata com o controle de posição das juntas que compõem o sistema de manipulação do robô IRoS. A seção \ref{sec:mot_dyn} apresenta mais detalhes sobre o servomotor Dynamixel MX-106R, sua modelagem e seu controle de velocidade. A seção \ref{sec:rob_cemig} exibe maiores particularidades sobre a modelagem e desenvolvimento do sistema de controle de posição das juntas do robô.
 
-\section{MOTOR DYNAMIXEL MX-106R} \label{sec:mot_dyn}
+\section{MOTOR DYNAMIXEL MX-106R} \label{sec:mot_dyn} %FEITO
 
 O servomotor Dynamixel MX-106R foi selecionado para realizar o movimento das juntas do robô através de uma criteriosa análise. Levou-se em consideração nesta análise: a massa, os requisitos de torque necessário, a dimensão, a tensão de alimentação e a velocidade \cite{cemig}.
 
@@ -926,7 +933,7 @@ Algumas das características do servomotor MX-106R ilustrado na figura \ref{fig:
 
 De acordo com \citeonline{cemig}, os servomotores Dynamixel MX-106R serão controlados a partir do ROS, utilizando-se interface de comunicação serial.
 
-\subsection{MODELAGEM DO MOTOR DYNAMIXEL MX-106R}
+\subsection{MODELAGEM DO MOTOR DYNAMIXEL MX-106R} %FEITO
 
 Com o propósito de obter o modelo matemático do servomotor Dynamixel MX-106R, realizou-se uma série de ensaios experimentais. Os ensaios tem a finalidade de auxiliar na modelagem matemática e em obter a transformada de Laplace da relação entre os sinais de saída e entrada do servomotor. Dessa forma, pode-se conseguir a função de transferência do servomotor e posteriormente aplicar ações de controle PID no sistema.
 
@@ -961,7 +968,7 @@ Kp = 1.\\
 \begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
 \centering
 \includegraphics[scale=0.48]{./imagens/Ensaio1}
-\caption[Ensaio Experimental 1: Motor Dynamixel MX-106R]{Ensaio Experimental 1: Motor Dynamixel MX-106R}
+\caption[Ensaio Experimental Motor 1: Motor Dynamixel MX-106R]{Ensaio Experimental 1: Motor Dynamixel MX-106R}
 \label{fig:ensaio1}
 \end{figure}
 
@@ -980,7 +987,7 @@ Kp = 1.\\
 \begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
 \centering
 \includegraphics[scale=0.48]{./imagens/Ensaio2}
-\caption[Ensaio Experimental 2: Motor Dynamixel MX-106R]{Ensaio Experimental 2: Motor Dynamixel MX-106R}
+\caption[Ensaio Experimental Motor 2: Motor Dynamixel MX-106R]{Ensaio Experimental 2: Motor Dynamixel MX-106R}
 \label{fig:ensaio2}
 
 \end{figure}
@@ -996,7 +1003,7 @@ Kp = 5.\\
 \begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
 \centering
 \includegraphics[scale=0.48]{./imagens/Ensaio3}
-\caption[Ensaio Experimental 3: Motor Dynamixel MX-106R]{Ensaio Experimental 3: Motor Dynamixel MX-106R}
+\caption[Ensaio Experimental Motor 3: Motor Dynamixel MX-106R]{Ensaio Experimental 3: Motor Dynamixel MX-106R}
 \label{fig:ensaio3}
 \end{figure}
 
@@ -1009,7 +1016,7 @@ Kp = 1.\\
 \begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
 \centering
 \includegraphics[scale=0.47]{./imagens/Ensaio4}
-\caption[Ensaio Experimental 4: Motor Dynamixel MX-106R]{Ensaio Experimental 4: Motor Dynamixel MX-106R}
+\caption[Ensaio Experimental Motor 4: Motor Dynamixel MX-106R]{Ensaio Experimental 4: Motor Dynamixel MX-106R}
 \label{fig:ensaio4}
 
 \end{figure}
@@ -1023,7 +1030,7 @@ Kp = 5.
 \begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
 \centering
 \includegraphics[scale=0.46]{./imagens/Ensaio5}
-\caption[Ensaio Experimental 5: Motor Dynamixel MX-106R]{Ensaio Experimental 5: Motor Dynamixel MX-106R}
+\caption[Ensaio Experimental Motor 5: Motor Dynamixel MX-106R]{Ensaio Experimental 5: Motor Dynamixel MX-106R}
 \label{fig:ensaio5}
 \end{figure}
 
@@ -1051,7 +1058,7 @@ $G(s) = \frac{K^{'}}{s}$
 
 Os cálculos dos modelos em malha aberta a partir do modelo de malha fechada podem ser observados nas seções \ref{sec:aprox_mod_1_ord} e \ref{sec:aprox_mod_int}.
 
-\subsubsection{APROXIMAÇÃO POR MODELO DE PRIMEIRA ORDEM} \label{sec:aprox_mod_1_ord}
+\subsubsection{APROXIMAÇÃO POR MODELO DE PRIMEIRA ORDEM} \label{sec:aprox_mod_1_ord} %FEITO
 
 Conforme informado nas seções anteriores, os ensaios foram realizados em um sistema de malha fechada com realimentação unitária \textit{(H(s) = 1)} semelhantes à figura \ref{fig:malha_fechada2}. Logo, sendo o modelo calculado em malha fechada a partir dos experimentos realizados, e exibidos na seção anterior, foi calculado através de uma aproximação uma função de transferência de malha aberta equivalente de primeira ordem.
 
@@ -1085,7 +1092,7 @@ A partir das equações \ref{eq:k_linha} e \ref{eq: tau_linha} pode obter uma ap
 
 $$G(s) = \frac{452,1}{1 + 451,8 s}$$
 
-\subsubsection{APROXIMAÇÃO POR MODELO INTEGRADOR} \label{sec:aprox_mod_int}
+\subsubsection{APROXIMAÇÃO POR MODELO INTEGRADOR} \label{sec:aprox_mod_int} %FEITO
 
 Realizando os mesmos procedimentos da seção anterior, mas considerando que a FTMA, G(s), do servomotor tem o seguinte formato:
 
@@ -1111,9 +1118,9 @@ Dessa forma, o modelo integrado em malha aberta calculado a partir dos ensaios e
 
 $$ G(s) = \frac{1,002}{s} $$
 
-\subsection{SIMULAÇÃO COMPUTACIONAL DO MODELO DO MX-106R}
+\subsection{SIMULAÇÃO COMPUTACIONAL DO MODELO DO MX-106R} %FEITO
 
-A partir do cálculo de modelos em malha aberta por uma aproximação de primeira ordem e por uma aproximação integradora, realizou-se simulação computacional no software Matlab buscando reproduzir as mesmas condições dos ensaios experimentais. Dessa forma, utilizou-se a FTMA calcula do servomotor e FT do controlador configurado com o mesmo parâmetro utilizado no experimento.
+A partir do cálculo de modelos em malha aberta por uma aproximação de primeira ordem e por uma aproximação integradora, realizou-se simulação computacional no software Matlab buscando reproduzir as mesmas condições dos ensaios experimentais. Dessa forma, utilizou-se a FTMA calculada do servomotor e a FT do controlador configurado com o mesmo parâmetro utilizado no experimento.
 
 A figura \ref{fig:malha_fechada2} representa pode representar o diagrama simulado, no qual:
 
@@ -1203,9 +1210,50 @@ Kp = 5.\\
 
 \end{itemize}
 
-%PAREI AQUI EXATAMENTE
+A partir das figuras apresentadas anteriormente, pode-se observar que o modelo calculado representa de forma satisfatória os ensaios reais. Dessa forma, pode-se utilizar as funções de transferências calculadas para aplicar o controle PID.
 
-\subsection{PREJETO DO CONTROLADOR DO MOTOR DYNAMIXEL MX-106R}
+
+\subsection{PROJETO DO CONTROLADOR DO MOTOR DYNAMIXEL MX-106R}  \label{sec:proj_cont_mot} %FEITO
+
+Uma vez que calculou-se a transformada de Laplace da equação que representa o modelo dinâmico do motor Dynamixel MX-106R, possibilitou a realização do projeto do controlador PID deste motor.
+
+Considerando que a malha de controle interna deve ter tempo de acomodação igual a 0.5 segundos, pois caso uma resposta mais rápida fosse solicitada os atuadores poderiam ser sobrecarregados e danificados. Outra solicitação foi que não deveria haver erro da resposta em malha fechada. Dessa forma, por o sistema em malha aberta ser do tipo integrador, notou-se que os controlador proporcional seria suficiente para atender as especificações.
+
+O ganho do controlador proporcional foi calculado com o auxílio das seguintes equações:
+
+Seja o sistama composto pelo motor Dynamixel MX-106R \textit{$G(s)$} e seu controlador interno \textit{$C(s)$}, a relação entre a saída e entrada do sistema será:
+
+\begin{equation}
+\frac{Y(s)}{U(s)} = \frac{C(s) G(s)}{1 + C(s)G(s)} \label{eq:g_s_c_s} \qquad Sendo \ C(s) = K_{p}
+\end{equation}
+
+Considerando que o pólo desejado (Pd) de malha fechada do sistema para atingir o tempo de acomodação (ts) desejada no critério de 2\%, pode ser calculado pela seguinte equação:
+
+\begin{equation}
+ts(2\%) = \frac{4}{Pd} \label{eq:ts_2ps}
+\end{equation}
+
+Logo:
+
+\begin{equation}
+Pd = \frac{4}{ts} \label{eq:pd_2ps}
+\end{equation}
+
+Substituindo na equação \ref{eq:g_s_c_s} $G(s) = \frac{K}{s}$ teremos:
+
+\begin{equation}
+\frac{Y(s)}{U(s)} = \frac{K Kp}{s + K Kp} \label{eq:1_or_kpk}
+\end{equation}
+
+Observando a equação \ref{eq:1_or_kpk}, pode-se dizer que $Pd = KKp$, logo o ganho do controlador proporcional pode ser calculado por:
+
+\begin{equation}
+Kp = \frac{Pd}{K} \label{eq:kp}
+\end{equation}
+
+Utilizando a equação \ref{eq:pd_2ps} para calcular o local do pólo desejado e posteriormente a equação \ref{eq:kp}, calculou-se o valor do ganho proporcional indicado para as especificações do projeto em questão. Desta forma encontrou-se:
+
+$$Kp = 13,32$$ 
 
 %A figura \ref{fig:blocos_clp} representa o diagramas de bloco geral de um CLP. Este equipamento é constituído por dois elementos principais: uma unidade de processamento (CPU) e interfaces de entrada e saída. \cite{silveira}
 
@@ -1213,75 +1261,382 @@ Kp = 5.\\
 
 %A figura \ref{fig:blocos_clp} representa o diagramas de bloco geral de um CLP. Este equipamento é constituído por dois elementos principais: uma unidade de processamento (CPU) e interfaces de entrada e saída. \cite{silveira}
 
-\subsection{SIMULAÇÃO COMPUTACIONAL DO SISTEMA MOTOR \textit{(MX-106R)} - CONTROLADOR}
-
-%A figura \ref{fig:blocos_clp} representa o diagramas de bloco geral de um CLP. Este equipamento é constituído por dois elementos principais: uma unidade de processamento (CPU) e interfaces de entrada e saída. \cite{silveira}
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
-
+% VERIFICAR CARACTERÍSTICA DO ROBÔ
 \section{ROBÔ} \label{sec:rob_cemig}
 
 %TEXTO SOBRE O ROBÔ CEMIG
+O Robô IRoS, feito pela SENAI-CIMATEC em parceria com a CEMIG, deverá inspecionar linhas de transmissão. Para realizar esta atividade o movimentos de suas juntas devem ser precisas, de forma que a posição final de cada uma dessas juntas seja a posição de referência do controlador. Dessa forma projetou-se um contralador PID com o objetivo de atingir as especificações de movimento desejada \cite{cemig}.
 
-\subsection{MODELAGEM DO ROBÔ CEMIG}
+Algumas das características do robô IRoS são \cite{cemig}:
 
-%FALAR SOBRE A FORMA UTILIZADA PARA MODELAR ROBÔ CEMIG
+\begin{itemize}
 
-\subsection{SIMULAÇÃO COMPUTACIONAL DO MODELO DO ROBÔ CEMIG}
+\item Comunicação digital através de interface em rede RS-485;
 
-%FALAR SOBRE A SIMUAÇÃO DO MODELO
+\item Controlador PID com parâmetros configuráveis;
+%ESTE ABAIXO
+\item Encoder magnético absoluto com resolução de 12 bits.
 
-\subsection{PREJETO DO CONTROLADOR DO ROBÔ CEMIG}
+\end{itemize}
 
-%A figura \ref{fig:blocos_clp} representa o diagramas de bloco geral de um CLP. Este equipamento é constituído por dois elementos principais: uma unidade de processamento (CPU) e interfaces de entrada e saída. \cite{silveira}
+De acordo com \citeonline{cemig}, o robô IRoS será controlados a partir do ROS, utilizando-se interface de comunicação serial.
 
-\subsection{SIMULAÇÃO COMPUTACIONAL DO SISTEMA ROBÔ - CONTROLADOR}
+\subsection{MODELAGEM DO ROBÔ CEMIG} %FEITO
 
-%A figura \ref{fig:blocos_clp} representa o diagramas de bloco geral de um CLP. Este equipamento é constituído por dois elementos principais: uma unidade de processamento (CPU) e interfaces de entrada e saída.\cite{ogata}
+Com o propósito de obter o modelo matemático do robô, realizou-se uma série de ensaios experimentais. Os ensaios tem a finalidade de auxiliar na modelagem matemática e em obter a transformada de Laplace da relação entre os sinais de saída e entrada do robô. Dessa forma, pode-se conseguir a função de transferência e posteriormente aplicar ações de controle PID no sistema.
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %%
+Os ensaios experimentais foram realizados seguindo quase todos os métodos indicados na seção \ref{sec:mod_degrau} deste documento \cite{astrom}. No entanto, por medidas de segurança, a modelagem do sistema foi realizada em malha fechada, mas atribuindo valor igual a zero aos ganhos integral e derivativo no controlador de posição da junta. Usou-se apenas o ganho proporcional do controlador com valor diferente de zero. Desta forma, foi estimado uma função de transferência em malha aberta para o servomotor a partir de uma função de transferência em malha fechada inicialmente calculada.
+
+Conforme \citeonline{astrom}, ensaios experimentais para obtenção de modelos devem ser repetidos variando a amplitude do sinal de entrada e as condições de operação. Visando atender esta recomendação e buscando-se também verificar a linearidade entre as diferentes regiões de operação do robô, os seguintes parâmetros foram modificados a cada experimento:\\
+
+\begin{itemize}
+
+\item Posições de operação \textit{(sinal de entrada do controlador)};
+
+\item Ganho proporcional do controlador;\\
+
+\end{itemize}
+
+Realizou-se oito ensaios experimentais. O sistema equivalente ao testado pode ser observado na figura \ref{fig:malha_fechada2} e as características e resultados de cada um dos ensaios foram:\\
+\\
+
+\begin{itemize}
+
+% PAREI QUANDO ESTAVA COLOCANDO OS GRÁFICOS AQUI
+\item Ensaio 1:
+\\
+% Vou plotar figura 2
+% Ensaio1_1_robo
+
+r(t) = -0.7 rad;\\
+Kp = 0.5.\\
+\\
+\\
+\\
+\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Ensaio1_1_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:ensaio1_1_robo}
+\end{figure}
+
+\item Ensaio 2:
+\\
+% Vou plotar figura 3
+% Ensaio1_2_robo
+ 
+r(t) = -0.2 rad;\\
+Kp = 0.5.\\
+\\
+\\
+\\
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Ensaio1_2_robo}
+\caption[Ensaio Experimental Robô 2: Junta Robótica IRoS]{Ensaio Experimental Robô 2: Junta Robótica IRoS}
+\label{fig:ensaio1_2_robo}
+\end{figure}
+
+\item Ensaio 3:
+
+% Vou plotar figura 5
+% Ensaio2_1_robo
+r(t) = -0.9 rad;\\
+Kp = 1.5.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Ensaio2_1_robo}
+\caption[Ensaio Experimental Robô 3: Junta Robótica IRoS]{Ensaio Experimental Robô 3: Junta Robótica IRoS}
+\label{fig:ensaio2_1_robo}
+\end{figure}
+
+\item Ensaio 4:
+
+% Vou plotar figura 3
+% Ensaio2_2_robo
+
+r(t) = -0.5 rad;\\
+Kp = 1.5.\\
+
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Ensaio2_2_robo}
+\caption[Ensaio Experimental Robô 4: Junta Robótica IRoS]{Ensaio Experimental Robô 4: Junta Robótica IRoS}
+\label{fig:ensaio2_2_robo}
+\end{figure}
+
+
+\item Ensaio 5:
+
+% Vou plotar figura 3
+% Ensaio3_1_robo
+ 
+r(t) = -0.5 rad;\\
+Kp = 3.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Ensaio3_1_robo}
+\caption[Ensaio Experimental Robô 5: Junta Robótica IRoS]{Ensaio Experimental Robô 5: Junta Robótica IRoS}
+\label{fig:ensaio3_1_robo}
+\end{figure}
+
+
+\item Ensaio 6:
+
+% Vou plotar figura 7
+% Ensaio3_2_robo
+
+r(t) = -0.9 rad;\\
+Kp = 3.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Ensaio3_2_robo}
+\caption[Ensaio Experimental Robô 6: Junta Robótica IRoS]{Ensaio Experimental Robô 6: Junta Robótica IRoS}
+\label{fig:ensaio3_2_robo}
+\end{figure}
+
+
+\item Ensaio 7:
+
+% Vou plotar figura 6
+% Ensaio4_1_robo
+
+r(t) = -0.2 rad;\\
+Kp = 4.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Ensaio4_1_robo}
+\caption[Ensaio Experimental Robô 7: Junta Robótica IRoS]{Ensaio Experimental Robô 7: Junta Robótica IRoS}
+\label{fig:ensaio4_1_robo}
+\end{figure}
+
+
+\item Ensaio 8:
+
+% Vou plotar figura 7
+% Ensaio4_2_robo
+
+r(t) = -0.9 rad;\\
+Kp = 4.\\
+
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Ensaio4_2_robo}
+\caption[Ensaio Experimental Robô 8: Junta Robótica IRoS]{Ensaio Experimental Robô 8: Junta Robótica IRoS}
+\label{fig:ensaio4_2_robo}
+\end{figure}
+
+\end{itemize}
+
+A partir das curvas obtidas nesta neção, foi calculado um modelo em malha fechada para o sistema.
+
+Conforme informado nas seções anteriores, os ensaios foram realizados em um sistema de malha fechada com realimentação unitária \textit{(H(s) = 1)} semelhantes à figura \ref{fig:malha_fechada2}. Logo, uma função de transferência em malha aberta de primeira ordem foi calculado a partir de um modelo em malha fechada a seguir semelhando a equação \ref{eq:g_s_1_ordem_MF}.
+
+A partir da aproximação da FTMF do robô por um sistema de primeira ordem, utilizou-se os conceitos e equações apresentados na seção \ref{sec:aprox_mod_1_ord}, possibilitando realizar uma estimativa para a FTMA do robô. Desta forma, a melhor equação que descreve os movimento do robô CEMIG em malha aberta é:
+\\
+\\
+$$G(s) = \frac{72,09}{1 + 67,48 s}$$
+\\
+\\
+\\
+\subsection{SIMULAÇÃO COMPUTACIONAL DO MODELO DO ROBÔ CEMIG} %FEITO
+
+A partir do cálculo do modelo em malha aberta por uma aproximação de primeira ordem, realizou-se simulação computacional no software Matlab buscando reproduzir as mesmas condições dos ensaios experimentais. Dessa forma, utilizou-se a FTMA calculada do robô e a FT do controlador configurado com o mesmo parâmetro utilizado no experimento.
+
+O resultado da simulação computacional do modelo de malha aberta do robô CEMIG quando submetido às mesmas condições do ensaio experimental pode ser visto nas figuras a seguir:
+\\
+\\
+\begin{itemize}
+
+\item Ensaio 1:
+\\
+r(t) = -0.7 rad;\\
+Kp = 0.5.\\
+\\
+\\
+\\
+\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Simu1_1_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu1_1_robo}
+\end{figure}
+
+\item Ensaio 2:
+\\
+\\
+r(t) = -0.2 rad;\\
+Kp = 0.5.\\
+\\
+\\
+\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Simu1_2_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu1_2_robo}
+\end{figure}
+
+
+\item Ensaio 3:
+ 
+r(t) = -0.9 rad;\\
+Kp = 1.5.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Simu2_1_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu2_1_robo}
+\end{figure}
+
+
+\item Ensaio 4:
+ 
+r(t) = -0.5 rad;\\
+Kp = 1.5.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Simu2_2_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu2_2_robo}
+\end{figure}
+
+
+\item Ensaio 5:
+ 
+r(t) = -0.5 rad;\\
+Kp = 3.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Simu3_1_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu3_1_robo}
+\end{figure}
+
+
+\item Ensaio 6:
+ 
+r(t) = -0.9 rad;\\
+Kp = 3.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Simu3_2_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu3_2_robo}
+\end{figure}
+
+
+\item Ensaio 7:
+ 
+r(t) = -0.2 rad;\\
+Kp = 4.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.43]{./imagens/Simu4_1_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu4_1_robo}
+\end{figure}
+
+
+\item Ensaio 8:
+ 
+r(t) = -0.9 rad;\\
+Kp = 4.\\
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Simu4_2_robo}
+\caption[Ensaio Experimental Robô 1: Junta Robótica IRoS]{Ensaio Experimental Robô 1: Junta Robótica IRoS}
+\label{fig:simu4_2_robo}
+\end{figure}
+
+
+\end{itemize}
+
+A partir das figuras apresentadas anteriormente, pode-se observar que o modelo calculado representa de forma satisfatória os ensaios reais. Dessa forma, pode-se utilizar as funções de transferências calculadas para aplicar o controle PID no sistema robótico.
+
+\subsection{PREJETO DO CONTROLADOR DO ROBÔ CEMIG} %FEITO
+
+Uma vez que foi calculada a transformada de Laplace da equação que representa o modelo dinâmico do robô, realizou-se então o projeto do controlador PID deste sistema.
+
+Considerando que a malha de controle externa deve ter tempo de acomodação igual a 5 segundos, pois um rápido movimento do sistema mecânico poderia deixa-lo em vibração. Outra solicitação foi que o sistema não deveria conter erro de posição maior que 5\%.
+
+Utilizando as equações \ref{eq:g_s_c_s}, \ref{eq:ts_2ps} e \ref{eq:pd_2ps} apresentadas na seção \ref{sec:proj_cont_mot}, no entanto, neste caso utilizando $G(s) = \frac{K}{1 + \tau s}$ tem-se:
+
+$$ \frac{Y(s)}{U(s)} = \frac{\frac{K Kp}{1 + \tau s}}{1 + \frac{K Kp}{1 + \tau s}} $$
+
+$$ \frac{Y(s)}{U(s)} = \frac{K Kp}{\tau s + 1 + K Kp} $$
+
+\begin{equation}
+\frac{Y(s)}{U(s)} = \frac{\frac{K Kp}{1 + K Kp}}{ 1 + \frac{\tau}{1 + K Kp}s}
+\end{equation}
+
+Desta forma, sendo:
+
+$$Pd = \frac{1 + K Kp}{\tau}$$
+
+e
+
+$$Pd = \frac{4}{ts}$$
+
+Logo:
+
+\begin{equation}
+Kp = \frac{\frac{4}{ts}\tau - 1}{K}
+\end{equation}
+
+Utilizando as equações apresentadas anteriormente e as especificações do projeto, encontrou-se:
+
+$$ Kp = 0,664 $$
+
+Utilizando o controlador proporcional com ganho de valor 0,664 no sistema identificado anteriormente, pode-se observar a resposta ao degrau na figura a seguir.
+
+% Adicionar figura
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Simu_cont}
+\caption[Simulação do Controlador: Visualização do tempo de acomodação]{Simulação do Controlador: Visualização do tempo de acomodação}
+\label{fig:Simu_cont}
+\end{figure}
+
+\begin{figure}[h] % Poderia ser \begin{figure}[posicionamento], onde o posicionamento pode ser h - no local do texto onde foi  o comando, t - no topo da pagina atual ou b - no final da pagina de trabalho.
+\centering
+\includegraphics[scale=0.42]{./imagens/Simu_cont_erro}
+\caption[Simulação do Controlador: Visualização do erro em regime permanente]{Simulação do Controlador: Visualização do erro em regime permanente}
+\label{fig:Simu_cont_erro}
+\end{figure}
+
+A partir das figuras \ref{fig:Simu_cont} e \ref{fig:Simu_cont_erro} observa-se que o sitema controlado atende ao tempo de acomodação e  ao erro de regime permanente desejado pelas especificações do projeto.
 
 \chapter{CONSIDERAÇÕES FINAIS}
 
-%Os CLPs\footnote{Também conhecidos como PLC, abreviatura do termo em inglês \textit{Programmable Logic Controller}} são equipamentos digitais capazes de controlar máquinas e processos, tornando possível a implementação de uma lógica de programação de forma dinâmica e flexível. É capaz, através de funções simples, realizar energização/desenergização, temporização, contagem, sequenciamento, operações matemáticas e manipulações de dados\cite{moraes}.
+Este trabalho permitiu obter conclusões com relação a modelagem do robô IRoS desenvolvido pelo SENAI-CIMATEC em parceria com a CEMIG. Posteriormente a modelagem foi aplicado uma lei de controle ao sistema e foi observado o seu desempenho.
 
-%\begin{enumerate}
-%\item \textbf{Entendimento do processo}: Consiste num estudo detalhado do processo a ser automatizado. Nesta fase devem ser levantados quais dados devem ser monitorados e historiados. 
+Foi possível verificar que os modelos encontrados, tanto para a malha interna quando para a malha externa do sistema apresentaram desempenho satisfatório, logo as funções de transferências calculadas, quando submetidas às mesmas condições de teste, apresentavam saída semelhante aos experimentos. Desta forma, segundo as simulações apresentadas, todos os movimentos podem ser realizados dentro das especificações do projeto.
 
-%\item \textbf{Tomada de dados}: Nesta etapa são escolhidas quais dados estarão presentes no sistema supervisório, de forma que este se torne conciso, facilitando a visualização e manuseio do sistema. Em situações onde estes dados trafeguem em rede, um grande número de dados pode acarretar em perda de desempenho no tráfego de informação.
-
-%\item \textbf{Planejamento do banco de dados}: Em plantas de maior porte e complexidade é necessário utilizar um banco de dados para tratar as \textit{tags}. Antes de montar o banco de dados é necessário definir qual será a velocidade de leitura das variáveis (\textit{scan}) e criar uma metodologia para nomeação (criação de \textit{tags}) e armazenamento das variáveis.
-
-%\item \textbf{Planejamento dos alarmes}: Esta etapa requer o envolvimento dos responsáveis técnicos pelo processo para definições das condições de acionamento dos alarmes, o modo de notificação ao operador e as ações que devem ser tomadas. É importante levar em conta que um grande número de alarmes pode causar sobrecarga no operador, podendo tornar confusa a operação em momentos agitados. Por isso é necessário que se faça uma filtragem dos alarmes realmente relevantes.
-
-%\item \textbf{Planejamento da navegação entre telas}: A organização das telas do processo em grupos com elementos relacionados (de uma mesma área ou processo, por exemplo) e condizentes com a realidade da planta facilita o uso do sistema, reduzindo o tempo necessário para o aprendizado.
-
-%\item \textbf{Desenho das telas}: Da mesma forma que para o planejamento da navegação, o desenho das telas deve visar simplificar a sua utilização. Além disso, deve se buscar manter um padrão de cores, de nomenclatura e de distribuição dos botões nas telas. Os elementos gráficos do padrão ISA (\textit{International Society of Automation}) são recomendados pois o seu uso é comum na indústria, assim como utilizar cores com significados reconhecidos, como o verde e o vermelho.
-
-%\item \textbf{Gráfico de tendências}: Estes elementos demonstram o comportamento das variáveis analisadas ao longo do tempo. Podem ser utilizados, por exemplo, para analisar tendências, monitorar a qualidade do processo e observar a relação entre variáveis distintas.
-
-%\item \textbf{Planejamento do sistema de segurança}: No desenvolvimento de um sistema supervisório é possível restringir o acesso através de senhas.
-
-%\item \textbf{Padrão Industrial de Desenvolvimento}: Deve se biscar a capacidade de integração do sistema supervisório com outras ferramentas de \textit{software} utilizadas no ambiente industrial, como o Excel, por exemplo.
-%\end{enumerate}
-
-%Segundo \citeonline{moraes}, são recomendadas as seguintes etapas para o planejamento e desenvolvimentos de um sistema supervisório:
-
-%Os produtores de \textit{softwares} geralmente concentram seus esforços no desenvolvimento das funcionalidades dos seus programas, considerando que os dados estarão disponíveis através de \textit{drivers}. Estes podem ser criados tanto pelos fabricantes de equipamentos quanto pelos desenvolvedores de \textit{softwares}. Essa falta de padronização implica em: \cite{candido}
-
-
-%\begin{itemize}
-%\item Existência de diversos \textit{drivers} para um mesmo equipamento.
-%\item Possibilidade de divergência de informações devido à existência destes diferentes \textit{drivers}, através de distintas formas de uso das funções.
-%\item Mudanças no \textit{hardware} devem ser acompanhadas por atualizações nos \textit{drivers}.
-%\item Incompatibilidade de aplicações devido a diferenças nos seus respectivos \textit{drivers}.
-%\end{itemize}
-
-%Considerando estes inconvenientes, muitas empresas têm optado por adotar uma padrão aberto de desenvolvimento de protocolos de comunicação como uma alternativa aos \textit{drivers} proprietários, utilizados para obtenção de dados dos CLPs. Além disso, o uso de um padrão aberto permite redução de custos e possibilita que sejam obtidos dados de qualquer fonte, equipamento ou aplicação, trazendo interoperabilidade para as soluções de automação.
-%
-%Com o uso do padrão OPC (\textit{OLE for Process Control}) os desenvolvedores ainda formam capazes de criar servidores de alta performance com desempenho igual ou superior ao obtido com os \textit{drivers} proprietários. Adicionalmente, os clientes ganharam maior flexibilidade na escolha dos seus fornecedores de software uma vez que, com o uso do padrão, não há o problema de indisponibilidade de \textit{driver} para aquele dispositivo.
+Apesar do bom desempenho encontrado nos teste com os modelos encontrados, sabe-se que existe algumas desvantagens em técnicas de modelagem offline dos robôs, pois a alteração da lubrificação, peso  ou algumas outras características podem modificar o sistema e consequentemente o seu modelo.
 
 \section{TRABALHOS FUTUROS}
+
+Para trabalhos futuros, sugere-se a criação de um ambiente de modelagem online no framework ROS. Este ambiente poderia modelar o sistema em intervalos de tempo periódicos e consequentemente garantir uma maior confiabilidade ao robô.
 
 % -------------------------------------------------------------------------
 %							ELEMENTOS PÓS TEXTUAIS
@@ -1304,13 +1659,13 @@ Kp = 5.\\
 
 % ------------------------------- ANEXOS ----------------------------------
 
-\begin{anexosenv}
+%\begin{anexosenv}
 
-\partanexos % Imprime uma página indicando o início dos anexos
+%\partanexos % Imprime uma página indicando o início dos anexos
 
-\chapter{Anexo 1}
+%\chapter{Anexo 1}
 
-\end{anexosenv}
+%\end{anexosenv}
 
 %-------------------------- INDICE REMISSIVO ------------------------------
 \printindex
